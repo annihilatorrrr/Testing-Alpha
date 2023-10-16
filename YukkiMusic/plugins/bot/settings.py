@@ -92,16 +92,14 @@ async def settings_back_markup(
     except:
         pass
     if CallbackQuery.message.chat.type == ChatType.PRIVATE:
-        try:
-            await app.resolve_peer(OWNER_ID[0])
-            OWNER = OWNER_ID[0]
-        except:
-            OWNER = None
-        buttons = private_panel(_, app.username, OWNER)
-        return await CallbackQuery.edit_message_text(
-            _["start_2"].format(MUSIC_BOT_NAME),
-            reply_markup=InlineKeyboardMarkup(buttons),
-        )
+        if OWNER_ID and CallbackQuery.from_user.id in OWNER_ID:
+            buttons = private_panel(_, app.username, OWNER_ID[0])
+            return await CallbackQuery.edit_message_text(
+                _["start_2"].format(MUSIC_BOT_NAME),
+                reply_markup=InlineKeyboardMarkup(buttons),
+            )
+        else:
+          
     else:
         buttons = setting_markup(_)
         return await CallbackQuery.edit_message_reply_markup(
@@ -111,7 +109,7 @@ async def settings_back_markup(
 async def gen_buttons_aud(_, aud):
     buttons = []
 
-    if OWNER_ID:
+    if OWNER_ID and CallbackQuery.from_user.id in OWNER_ID:
         if aud == "STUDIO":
             buttons = audio_quality_markup(_, STUDIO=True)
         elif aud == "HIGH":
@@ -121,20 +119,20 @@ async def gen_buttons_aud(_, aud):
         elif aud == "LOW":
             buttons = audio_quality_markup(_, LOW=True)
     else:
+        # Actions for normal users
         if aud == "HIGH":
             buttons = audio_quality_markup(_, HIGH=True)
         elif aud == "MEDIUM":
             buttons = audio_quality_markup(_, MEDIUM=True)
         elif aud == "LOW":
             buttons = audio_quality_markup(_, LOW=True)
-    return buttons
 
-# Define the audio_quality_markup function if not already defined
+    return buttons
 
 async def gen_buttons_vid(_, aud):
     buttons = []
 
-    if OWNER_ID:
+    if OWNER_ID and CallbackQuery.from_user.id in OWNER_ID:
         if aud == "UHD_4K":
             buttons = video_quality_markup(_, UHD_4K=True)
         elif aud == "QHD_2K":
@@ -148,6 +146,7 @@ async def gen_buttons_vid(_, aud):
         elif aud == "SD_360p":
             buttons = video_quality_markup(_, SD_360p=True)
     else:
+        # Actions for normal users
         if aud == "FHD_1080p":
             buttons = video_quality_markup(_, FHD_1080p=True)
         elif aud == "HD_720p":
@@ -156,6 +155,7 @@ async def gen_buttons_vid(_, aud):
             buttons = video_quality_markup(_, SD_480p=True)
         elif aud == "SD_360p":
             buttons = video_quality_markup(_, SD_360p=True)
+
     return buttons
 
 # without admin rights
