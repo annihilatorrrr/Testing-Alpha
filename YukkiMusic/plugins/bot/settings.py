@@ -99,7 +99,8 @@ async def settings_back_markup(
                 reply_markup=InlineKeyboardMarkup(buttons),
             )
         else:
-          
+            # Actions for normal users
+            # Define different actions for normal users here
     else:
         buttons = setting_markup(_)
         return await CallbackQuery.edit_message_reply_markup(
