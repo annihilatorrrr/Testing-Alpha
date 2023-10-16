@@ -101,6 +101,7 @@ async def settings_back_markup(
         else:
             # Actions for normal users
             # Define different actions for normal users here
+            pass
     else:
         buttons = setting_markup(_)
         return await CallbackQuery.edit_message_reply_markup(
