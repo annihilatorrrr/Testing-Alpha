@@ -113,7 +113,7 @@ def is_sudoer(user_id):
     return user_id in SUDOERS
 
 ## Audio and Video Quality
-async def gen_buttons_vid(_, aud, user_id):
+async def gen_buttons_aud(_, aud, user_id):
     buttons = []
     
     if aud == "STUDIO" and is_sudoer(user_id):
@@ -127,7 +127,7 @@ async def gen_buttons_vid(_, aud, user_id):
     return buttons
 
 
-async def gen_buttons_vid(_, aud, is_sudoer):
+async def gen_buttons_vid(_, aud, user_id):
     buttons = []
 
     if aud == "UHD_4K" and is_sudoer(user_id):
