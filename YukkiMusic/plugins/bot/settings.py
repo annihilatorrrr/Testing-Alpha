@@ -82,7 +82,7 @@ async def settings_cb(client, CallbackQuery, _):
 
 
 @app.on_callback_query(
-    filters.regex("settingsback_helper") & ~BANNED_USERS
+    filters.regex("settingsback_helper") & ~BANNED_USERS & ~
 )
 @languageCB
 async def settings_back_markup(
@@ -110,35 +110,55 @@ async def settings_back_markup(
         )
 
 ## Audio and Video Quality
-async def gen_buttons_aud(_, aud, SUDOERS):
+async def gen_buttons_aud(_, aud):
     buttons = []
-    
-    if aud == "STUDIO" and SUDOERS:
-        buttons = audio_quality_markup(_, STUDIO=True)
-    elif aud == "HIGH":
-        buttons = audio_quality_markup(_, HIGH=True)
-    elif aud == "MEDIUM":
-        buttons = audio_quality_markup(_, MEDIUM=True)
-    elif aud == "LOW":
-        buttons = audio_quality_markup(_, LOW=True)
+  
+    if OWNER_ID:
+         if aud == "STUDIO":
+           buttons = audio_quality_markup(_, STUDIO=True)
+         elif aud == "HIGH":
+             buttons = audio_quality_markup(_, HIGH=True)
+         elif aud == "MEDIUM":
+             buttons = audio_quality_markup(_, MEDIUM=True)
+         elif aud == "LOW":
+             buttons = audio_quality_markup(_, LOW=True)
+    else:
+         if aud == "HIGH":
+           buttons = audio_quality_markup(_, HIGH=True)
+         elif aud == "MEDIUM":
+             buttons = audio_quality_markup(_, MEDIUM=True)
+         elif aud == "LOW":
+             buttons = audio_quality_markup(_, LOW=True)
     return buttons
 
 
-async def gen_buttons_vid(_, aud, SUDOERS):
+
+async def gen_buttons_vid(_, aud):
     buttons = []
 
-    if aud == "UHD_4K" and SUDOERS:
-        buttons = video_quality_markup(_, UHD_4K=True)
-    elif aud == "QHD_2K" and SUDOERS:
-        buttons = video_quality_markup(_, QHD_2K=True)
-    elif aud == "FHD_1080p":
-        buttons = video_quality_markup(_, FHD_1080p=True)
-    elif aud == "HD_720p":
-        buttons = video_quality_markup(_, HD_720p=True)
-    elif aud == "SD_480p":
-        buttons = video_quality_markup(_, SD_480p=True)
-    elif aud == "SD_360p":
-        buttons = video_quality_markup(_, SD_360p=True)
+    if OWNER_ID:
+         if aud == "UHD_4K":
+           buttons = video_quality_markup(_, UHD_4K=True)
+         elif aud == "QHD_2K":
+             buttons = video_quality_markup(_, QHD_2K=True)
+         elif aud == "FHD_1080p":
+             buttons = video_quality_markup(_, FHD_1080p=True)
+         elif aud == "HD_720p":
+             buttons = video_quality_markup(_, HD_720p=True)
+         elif aud == "SD_480p":
+             buttons = video_quality_markup(_, SD_480p=True)
+         elif aud == "SD_360p":
+             buttons = video_quality_markup(_, SD_360p=True)
+    else:
+    
+         if aud == "FHD_1080p":
+           buttons = video_quality_markup(_, FHD_1080p=True)
+         elif aud == "HD_720p":
+             buttons = video_quality_markup(_, HD_720p=True)
+         elif aud == "SD_480p":
+             buttons = video_quality_markup(_, SD_480p=True)
+         elif aud == "SD_360p":
+             buttons = video_quality_markup(_, SD_360p=True)
 
     return buttons
 
