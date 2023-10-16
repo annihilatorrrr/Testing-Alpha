@@ -109,15 +109,11 @@ async def settings_back_markup(
             reply_markup=InlineKeyboardMarkup(buttons)
         )
 
-# Define the function to check if a user is a sudoer
-def is_sudoer(user_id):
-    return user_id in SUDOERS
-
 ## Audio and Video Quality
-async def gen_buttons_aud(_, aud, user_id):
+async def gen_buttons_aud(_, aud, SUDOERS):
     buttons = []
     
-    if aud == "STUDIO" and is_sudoer(user_id):
+    if aud == "STUDIO" and SUDOERS:
         buttons = audio_quality_markup(_, STUDIO=True)
     elif aud == "HIGH":
         buttons = audio_quality_markup(_, HIGH=True)
@@ -128,12 +124,12 @@ async def gen_buttons_aud(_, aud, user_id):
     return buttons
 
 
-async def gen_buttons_vid(_, aud, user_id):
+async def gen_buttons_vid(_, aud, SUDOERS):
     buttons = []
 
-    if aud == "UHD_4K" and is_sudoer(user_id):
+    if aud == "UHD_4K" and SUDOERS:
         buttons = video_quality_markup(_, UHD_4K=True)
-    elif aud == "QHD_2K" and is_sudoer(user_id):
+    elif aud == "QHD_2K" and SUDOERS:
         buttons = video_quality_markup(_, QHD_2K=True)
     elif aud == "FHD_1080p":
         buttons = video_quality_markup(_, FHD_1080p=True)
