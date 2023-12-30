@@ -14,6 +14,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 from youtubesearchpython.__future__ import VideosSearch
 import config
 
+
 class SpotifyAPI:
     def __init__(self):
         self.regex = r"^(https:\/\/open.spotify.com\/)(.*)$"

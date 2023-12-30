@@ -24,9 +24,7 @@ VARS_COMMAND = get_command("VARS_COMMAND")
 
 @app.on_message(filters.command(VARS_COMMAND) & SUDOERS)
 async def varsFunc(client, message):
-    mystic = await message.reply_text(
-        "Please wait.. Getting your config"
-    )
+    mystic = await message.reply_text("Please wait.. Getting your config")
     v_limit = await get_video_limit()
     bot_name = config.MUSIC_BOT_NAME
     up_r = f"[Repo]({config.UPSTREAM_REPO})"
@@ -52,10 +50,7 @@ async def varsFunc(client, message):
         s_c = f"[Channel]({config.SUPPORT_CHANNEL})"
     s_g = "No" if not config.SUPPORT_GROUP else f"[Group]({config.SUPPORT_GROUP})"
     token = "No" if not config.GIT_TOKEN else "Yes"
-    if (
-        not config.SPOTIFY_CLIENT_ID
-        and not config.SPOTIFY_CLIENT_SECRET
-    ):
+    if not config.SPOTIFY_CLIENT_ID and not config.SPOTIFY_CLIENT_SECRET:
         sotify = "No"
     else:
         sotify = "Yes"
