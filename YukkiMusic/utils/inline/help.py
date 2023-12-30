@@ -16,16 +16,12 @@ from YukkiMusic import app
 
 
 def help_pannel(_, START: Union[bool, int] = None):
-    first = [
-        InlineKeyboardButton(text=_["CLOSEMENU_BUTTON"], callback_data="close")
-    ]
+    first = [InlineKeyboardButton(text=_["CLOSEMENU_BUTTON"], callback_data="close")]
     second = [
         InlineKeyboardButton(
             text=_["BACK_BUTTON"], callback_data="settingsback_helper"
         ),
-        InlineKeyboardButton(
-            text=_["CLOSEMENU_BUTTON"], callback_data="close"
-        ),
+        InlineKeyboardButton(text=_["CLOSEMENU_BUTTON"], callback_data="close"),
     ]
     mark = second if START else first
     return InlineKeyboardMarkup(
@@ -68,9 +64,7 @@ def help_back_markup(_):
                 InlineKeyboardButton(
                     text=_["BACK_BUTTON"], callback_data="settings_back_helper"
                 ),
-                InlineKeyboardButton(
-                    text=_["CLOSE_BUTTON"], callback_data="close"
-                ),
+                InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close"),
             ]
         ]
     )
