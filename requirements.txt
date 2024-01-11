@@ -12,14 +12,13 @@ pillow
 psutil
 pykeyboard
 py-tgcalls
-pyrofork
+git+https://github.com/KurimuzonAkuma/pyrogram@dev
 python-dotenv
 pyyaml
 requests
 speedtest-cli
 spotipy
 tgcrypto
-uvloop
 youtube-search
 youtube-search-python
-yt-dlp
+git+https://github.com/yt-dlp/yt-dlp@master
