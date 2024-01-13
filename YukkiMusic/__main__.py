@@ -9,7 +9,6 @@
 #
 
 import asyncio
-import uvloop
 import importlib
 import sys
 
@@ -79,6 +78,5 @@ async def init():
 
 
 if __name__ == "__main__":
-    uvloop.install()
     loop.run_until_complete(init())
     LOGGER("YukkiMusic").info("Stopping Yukki Music Bot! GoodBye")

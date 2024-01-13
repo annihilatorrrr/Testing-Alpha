@@ -1,14 +1,15 @@
 <img src="https://telegra.ph/file/c0e014ff34f34d1056627.png" align="right" width="200" height="200"/>
 
-# Yukki Music Bot <img src="https://img.shields.io/github/v/release/TeamYukki/YukkiMusicBot?color=black&logo=github&logoColor=black&style=social" alt="RELEASE">
+# YukkiMusicFork <img src="https://img.shields.io/github/v/release/TeamYukki/YukkiMusicBot?color=black&logo=github&logoColor=black&style=social" alt="RELEASE">
 
-[Yukki Music Bot](https://github.com/TeamYukki/YukkiMusicBot) is a Powerful Telegram Music+Video Bot written in Python using Pyrogram and Py-Tgcalls by which you can stream songs, video and even live streams in your group calls via various sources.
+[YukkiMusicFork](https://github.com/Pranav-Saraswat/YukkiMusicFork) is a Powerful Telegram Music+Video Bot written in Python using Pyrogram and Py-Tgcalls by which you can stream songs, video and even live streams in your group calls via various sources.
 
 * Youtube, Soundcloud, Apple Music, Spotify, Resso, Live Streams and Telegram Audios & Videos support.
 * Written from scratch, making it stable and less crashes with attractive thumbnails.
 * Loop, Seek, Shuffle, Specific Skip, Playlists etc support
 * Multi-Language support
 
+## This is a Fork version of YukkiMusic Repo with some changes to give a new support of telegram updates
 
 # ⚡️ Getting Started [[Documentation](https://notreallyshikhar.gitbook.io/yukkimusicbot/)]
 
@@ -16,8 +17,8 @@
 
 ## 🚀 Heroku Deployment
 
-<h4>Click the button below to deploy Yukki Music Bot on Heroku!</h4>    
-<a href="https://dashboard.heroku.com/new?template=https://github.com/Pranav-Saraswat/Testing-Alpha"><img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200""/></a>
+<h4>Click the button below to deploy YukkiMusicFork on Heroku!</h4>    
+<a href="https://dashboard.heroku.com/new?template=https://github.com/Pranav-Saraswat/YukkiMusicFork"><img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200""/></a>
 
 
 ## 🖇 Generating Pyrogram String Session
@@ -40,13 +41,13 @@ Reach out to the maintainer at one of the following places:
 - Contact options listed on [this GitHub profile](https://github.com/TeamYukki)
 - [Telegram Support](https://t.me/YukkiSupport)
 
-If you want to say **thank you** or/and support active development of YukkiMusicBot:
+If you want to say **thank you** or/and support active development of YukkiMusicFork:
 
 - Add a [GitHub Star](https://github.com/TeamYukki/YukkiMusicBot) to the project.
 - Fork the Repo :)
 - Write interesting articles about the project on [Dev.to](https://dev.to/), [Medium](https://medium.com/) or your personal blog.
 
-Together, we can make **YukkiMusicBot** better!
+Together, we can make **YukkiMusicFork** better!
 # 📑 Acknowledgement / Credits
 
 Special thanks to these amazing projects/people which/who help power Yukki Music Bot:
