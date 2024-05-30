@@ -16,6 +16,7 @@ from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
 
 from config import (BANNED_USERS, CLEANMODE_DELETE_MINS,
                     MUSIC_BOT_NAME, OWNER_ID)
+from YukkiMusic.misc import SUDOERS
 from strings import get_command
 from YukkiMusic import app
 from YukkiMusic.utils.database import (add_nonadmin_chat,
@@ -79,7 +80,6 @@ async def settings_cb(client, CallbackQuery, _):
         reply_markup=InlineKeyboardMarkup(buttons),
     )
 
-
 @app.on_callback_query(
     filters.regex("settingsback_helper") & ~BANNED_USERS
 )
@@ -92,51 +92,73 @@ async def settings_back_markup(
     except:
         pass
     if CallbackQuery.message.chat.type == ChatType.PRIVATE:
-        try:
-            await app.resolve_peer(OWNER_ID[0])
-            OWNER = OWNER_ID[0]
-        except:
-            OWNER = None
-        buttons = private_panel(_, app.username, OWNER)
-        return await CallbackQuery.edit_message_text(
-            _["start_2"].format(MUSIC_BOT_NAME),
-            reply_markup=InlineKeyboardMarkup(buttons),
-        )
+        if OWNER_ID and CallbackQuery.from_user.id in OWNER_ID:
+            buttons = private_panel(_, app.username, OWNER_ID[0])
+            return await CallbackQuery.edit_message_text(
+                _["start_2"].format(MUSIC_BOT_NAME),
+                reply_markup=InlineKeyboardMarkup(buttons),
+            )
+        else:
+            # Actions for normal users
+            # Define different actions for normal users here
+            pass
     else:
         buttons = setting_markup(_)
         return await CallbackQuery.edit_message_reply_markup(
             reply_markup=InlineKeyboardMarkup(buttons)
         )
 
-
-## Audio and Video Quality
 async def gen_buttons_aud(_, aud):
-    if aud == "STUDIO":
-        buttons = audio_quality_markup(_, STUDIO=True)
-    elif aud == "HIGH":
-        buttons = audio_quality_markup(_, HIGH=True)
-    elif aud == "MEDIUM":
-        buttons = audio_quality_markup(_, MEDIUM=True)
-    elif aud == "LOW":
-        buttons = audio_quality_markup(_, LOW=True)
-    return buttons
+    buttons = []
 
+    if OWNER_ID and CallbackQuery.from_user.id in OWNER_ID:
+        if aud == "STUDIO":
+            buttons = audio_quality_markup(_, STUDIO=True)
+        elif aud == "HIGH":
+            buttons = audio_quality_markup(_, HIGH=True)
+        elif aud == "MEDIUM":
+            buttons = audio_quality_markup(_, MEDIUM=True)
+        elif aud == "LOW":
+            buttons = audio_quality_markup(_, LOW=True)
+    else:
+        # Actions for normal users
+        if aud == "HIGH":
+            buttons = audio_quality_markup(_, HIGH=True)
+        elif aud == "MEDIUM":
+            buttons = audio_quality_markup(_, MEDIUM=True)
+        elif aud == "LOW":
+            buttons = audio_quality_markup(_, LOW=True)
+
+    return buttons
 
 async def gen_buttons_vid(_, aud):
-    if aud == "UHD_4K":
-        buttons = video_quality_markup(_, UHD_4K=True)
-    elif aud == "QHD_2K":
-        buttons = video_quality_markup(_, QHD_2K=True)
-    elif aud == "FHD_1080p":
-        buttons = video_quality_markup(_, FHD_1080p=True)
-    elif aud == "HD_720p":
-        buttons = video_quality_markup(_, HD_720p=True)
-    elif aud == "SD_480p":
-        buttons = video_quality_markup(_, SD_480p=True)
-    elif aud == "SD_360p":
-        buttons = video_quality_markup(_, SD_360p=True)
-    return buttons
+    buttons = []
 
+    if OWNER_ID and CallbackQuery.from_user.id in OWNER_ID:
+        if aud == "UHD_4K":
+            buttons = video_quality_markup(_, UHD_4K=True)
+        elif aud == "QHD_2K":
+            buttons = video_quality_markup(_, QHD_2K=True)
+        elif aud == "FHD_1080p":
+            buttons = video_quality_markup(_, FHD_1080p=True)
+        elif aud == "HD_720p":
+            buttons = video_quality_markup(_, HD_720p=True)
+        elif aud == "SD_480p":
+            buttons = video_quality_markup(_, SD_480p=True)
+        elif aud == "SD_360p":
+            buttons = video_quality_markup(_, SD_360p=True)
+    else:
+        # Actions for normal users
+        if aud == "FHD_1080p":
+            buttons = video_quality_markup(_, FHD_1080p=True)
+        elif aud == "HD_720p":
+            buttons = video_quality_markup(_, HD_720p=True)
+        elif aud == "SD_480p":
+            buttons = video_quality_markup(_, SD_480p=True)
+        elif aud == "SD_360p":
+            buttons = video_quality_markup(_, SD_360p=True)
+
+    return buttons
 
 # without admin rights
 
