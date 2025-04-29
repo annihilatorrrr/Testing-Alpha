@@ -15,15 +15,16 @@ from strings import get_string
 from YukkiMusic import app
 from YukkiMusic.misc import SUDOERS
 from YukkiMusic.utils.database import (
-    get_authuser_names, 
-    get_cmode, 
-    get_lang, 
-    is_active_chat, 
-    is_commanddelete_on, 
-    is_maintenance, 
+    get_authuser_names,
+    get_cmode,
+    get_lang,
+    is_active_chat,
+    is_commanddelete_on,
+    is_maintenance,
     is_nonadmin_chat,
 )
 from ..formatters import int_to_alpha
+
 
 def AdminRightsCheck(mystic):
     async def wrapper(client, message):
@@ -53,9 +54,7 @@ def AdminRightsCheck(mystic):
                     ]
                 ]
             )
-            return await message.reply_text(
-                _["general_4"], reply_markup=upl
-            )
+            return await message.reply_text(_["general_4"], reply_markup=upl)
         if message.command[0][0] == "c":
             chat_id = await get_cmode(message.chat.id)
             if chat_id is None:
@@ -79,6 +78,7 @@ def AdminRightsCheck(mystic):
         return await mystic(client, message, _, chat_id)
 
     return wrapper
+
 
 def AdminActual(mystic):
     async def wrapper(client, message):
@@ -108,15 +108,11 @@ def AdminActual(mystic):
                     ]
                 ]
             )
-            return await message.reply_text(
-                _["general_4"], reply_markup=upl
-            )
+            return await message.reply_text(_["general_4"], reply_markup=upl)
         if message.from_user.id not in SUDOERS:
             try:
-                member = (
-                    await app.get_chat_member(
-                        message.chat.id, message.from_user.id
-                    )
+                member = await app.get_chat_member(
+                    message.chat.id, message.from_user.id
                 )
                 if member.status != ChatMemberStatus.ADMINISTRATOR:
                     return await message.reply(_["general_5"])
@@ -125,6 +121,7 @@ def AdminActual(mystic):
         return await mystic(client, message, _)
 
     return wrapper
+
 
 def ActualAdminCB(mystic):
     async def wrapper(client, CallbackQuery):
@@ -141,32 +138,26 @@ def ActualAdminCB(mystic):
             _ = get_string("en")
         if CallbackQuery.message.chat.type == ChatType.PRIVATE:
             return await mystic(client, CallbackQuery, _)
-        is_non_admin = await is_nonadmin_chat(
-            CallbackQuery.message.chat.id
-        )
+        is_non_admin = await is_nonadmin_chat(CallbackQuery.message.chat.id)
         if not is_non_admin:
             try:
-                a = (
-                    await app.get_chat_member(
-                        CallbackQuery.message.chat.id,
-                        CallbackQuery.from_user.id,
-                    )
+                a = await app.get_chat_member(
+                    CallbackQuery.message.chat.id,
+                    CallbackQuery.from_user.id,
                 )
                 if a.status != ChatMemberStatus.ADMINISTRATOR:
                     if CallbackQuery.from_user.id not in SUDOERS:
-                        token = await int_to_alpha(
-                            CallbackQuery.from_user.id
-                        )
-                        _check = await get_authuser_names(
-                            CallbackQuery.from_user.id
-                        )
+                        token = await int_to_alpha(CallbackQuery.from_user.id)
+                        _check = await get_authuser_names(CallbackQuery.from_user.id)
                         if token not in _check:
                             return await CallbackQuery.answer(
                                 _["general_5"],
                                 show_alert=True,
                             )
                 elif a is None:
-                    return await CallbackQuery.answer("You are not a member of this chat.")
+                    return await CallbackQuery.answer(
+                        "You are not a member of this chat."
+                    )
             except Exception as e:
                 return await CallbackQuery.answer(f"Error: {str(e)}")
         return await mystic(client, CallbackQuery, _)

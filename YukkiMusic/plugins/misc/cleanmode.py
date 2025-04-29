@@ -21,14 +21,19 @@ from config import adminlist, chatstats, clean, userstats
 from strings import get_command
 from YukkiMusic import app, userbot
 from YukkiMusic.misc import SUDOERS
-from YukkiMusic.utils.database import (get_active_chats,
-                                       get_authuser_names, get_client,
-                                       get_particular_top,
-                                       get_served_chats,
-                                       get_served_users, get_user_top,
-                                       is_cleanmode_on, set_queries,
-                                       update_particular_top,
-                                       update_user_top)
+from YukkiMusic.utils.database import (
+    get_active_chats,
+    get_authuser_names,
+    get_client,
+    get_particular_top,
+    get_served_chats,
+    get_served_users,
+    get_user_top,
+    is_cleanmode_on,
+    set_queries,
+    update_particular_top,
+    update_user_top,
+)
 from YukkiMusic.utils.decorators.language import language
 from YukkiMusic.utils.formatters import alpha_to_int
 
@@ -209,9 +214,7 @@ async def auto_clean():
                     else:
                         next_spot = 1
                     new_spot = {"spot": next_spot, "title": title}
-                    await update_particular_top(
-                        chat_id, vidid, new_spot
-                    )
+                    await update_particular_top(chat_id, vidid, new_spot)
             for user_id in userstats:
                 for dic in userstats[user_id]:
                     vidid = dic["vidid"]
@@ -224,9 +227,7 @@ async def auto_clean():
                     else:
                         next_spot = 1
                     new_spot = {"spot": next_spot, "title": title}
-                    await update_user_top(
-                        user_id, vidid, new_spot
-                    )
+                    await update_user_top(user_id, vidid, new_spot)
         except:
             continue
         try:
@@ -237,9 +238,7 @@ async def auto_clean():
                     if datetime.now() <= x["timer_after"]:
                         continue
                     try:
-                        await app.delete_messages(
-                            chat_id, x["msg_id"]
-                        )
+                        await app.delete_messages(chat_id, x["msg_id"])
                     except FloodWait as e:
                         await asyncio.sleep(e.value)
                     except:
@@ -251,11 +250,8 @@ async def auto_clean():
             for chat_id in served_chats:
                 if chat_id not in adminlist:
                     adminlist[chat_id] = []
-                    admins = (
-                        app.get_chat_members(
-                            chat_id, 
-                            filter=ChatMembersFilter.ADMINISTRATORS
-                        )
+                    admins = app.get_chat_members(
+                        chat_id, filter=ChatMembersFilter.ADMINISTRATORS
                     )
                     async for user in admins:
                         if user.status == ChatMemberStatus.ADMINISTRATOR:
